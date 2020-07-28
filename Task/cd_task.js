@@ -49,9 +49,10 @@ function cd_sign1() {
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
-console.log(data)
-      //var obj = JSON.parse(data)
-      if (data.code == 0) {
+//console.log(data)
+      var obj = JSON.parse(data)
+      console.log(obj)
+      if (obj.data.code == 0) {
         var res = "签到成功";
       } else {
         var res = "重复签到";
