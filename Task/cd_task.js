@@ -45,7 +45,7 @@ function cd_sign1() {
       "TK": cd_tk
     },
     body: cd_sign,
-    //body:JSON.stringify(cd_signbd)
+    body:JSON.stringify(cd_sign)
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
@@ -72,7 +72,7 @@ function cd_video1() {
       "TK": cd_tk
     },
     body: cd_video,
-    body:JSON.stringify(cd_videobd)
+    body:JSON.stringify(cd_video)
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
@@ -95,7 +95,7 @@ function cd_roulette1() {
       "TK": cd_tk
     },
     body: cd_roulette,
-    body:JSON.stringify(cd_roulettebd)
+    body:JSON.stringify(cd_roulette)
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
@@ -122,7 +122,7 @@ function cd_time1() {
       "TK": cd_tk
     },
     body: cd_time,
-    body:JSON.stringify(cd_timebd)
+    body:JSON.stringify(cd_time)
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
@@ -148,7 +148,7 @@ function cd_svideo1() {
       "TK": cd_tk
     },
     body: cd_svideo,
-    body:JSON.stringify(cd_svideobd)
+    body:JSON.stringify(cd_svideo)
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
