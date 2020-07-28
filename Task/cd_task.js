@@ -42,7 +42,7 @@ function cd_sign1() {
     url: moreurl,
     headers: {
       "Token": cd_Token,
-      "TK": cd_tk
+      "TK": cd_tk,"Content-Type":"application/json"
     },
     body: cd_sign,
     body:JSON.stringify(cd_sign)
