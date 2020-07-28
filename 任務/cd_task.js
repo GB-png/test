@@ -45,11 +45,11 @@ function cd_sign1() {
       "TK": cd_tk
     },
     body: cd_sign,
-    body:JSON.stringify(cd_signbd)
+    //body:JSON.stringify(cd_signbd)
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
-//      console.log(data)
+ console.log(data)
       var obj = JSON.parse(data)
       if (obj.code == 0) {
         var res = "签到成功";
@@ -58,7 +58,7 @@ function cd_sign1() {
       }
     
         pushmsg( "[每日签到]"+"\n"+res);
-      
+       console.log(pushmsg)
 
   })
 
