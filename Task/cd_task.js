@@ -49,7 +49,7 @@ function cd_sign1() {
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
-console.log(data)
+//console.log(data)
       var obj = JSON.parse(data)
       if (obj.code == 0) {
         var res = "签到成功";
