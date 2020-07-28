@@ -45,7 +45,7 @@ function cd_sign1() {
       "TK": cd_tk,"Content-Type":"application/json"
     },
     body: cd_sign,
-    body:JSON.stringify(cd_sign)
+    //body:JSON.stringify(cd_sign)
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
