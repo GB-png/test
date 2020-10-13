@@ -19,14 +19,14 @@ if ($request.url.indexOf(path1) != -1){
 	obj.data.user["isvip"] = "1";
 	//obj.data.user["goldcoin"] = "666";
 }
-/*if ($request.url.indexOf(path2) != -1){
+if ($request.url.indexOf(path2) != -1){
 	obj.retcode = "0";
 	obj.data.lastplayindex = "0";
-	if(obj.data.hasOwnProperty("httpurl_preview")){
-		var playurl = obj.data["httpurl_preview"];
+	if(obj.data.hasOwnProperty("plt3erl")){
+		var playurl = obj.data["plt3erl"];
 		obj.data["httpurl"] = playurl;
 	};
-} */
+} 
 
 if ($request.url.indexOf(ad) != -1) {
 delete obj.data.iOS_adgroups;
