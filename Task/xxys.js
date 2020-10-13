@@ -1,15 +1,14 @@
 /*
 XiaoXiaoYingShi unlock Vip
 QX:
-https:\/\/.*\..*\.com\/(vod\/reqplay\/|ucp/index|getGlobalData) url script-response-body https://raw.githubusercontent.com/photonmang/quantumultX/master/xxys.js
+https:\/\/.*\..*\.com\/(ssp-svr\/ssp\/|ucp/index) url script-response-body https://raw.githubusercontent.com/photonmang/quantumultX/master/xxys.js
 Surge:
 http-response https:\/\/.*\..*\.com\/(vod\/reqplay\/|ucp/index|getGlobalData) requires-body=1,max-size=0,script-path= https://raw.githubusercontent.com/photonmang/quantumultX/master/xxys.js
 MITM = *.xxjjappss.com
 */
 
 const path1 = "/ucp/index";
-const path2 = "/vod/reqplay/";
-const ad = 'getGlobalData';
+const ad = 'list3';
 let obj = JSON.parse($response.body);
 
 if ($request.url.indexOf(path1) != -1){
@@ -28,8 +27,6 @@ if ($request.url.indexOf(path1) != -1){
 	};
 } */
 if ($request.url.indexOf(ad) != -1) {
-delete obj.data.adrows
-delete obj.data.iOS_adgroups
-obj.retcode = "1"	
+delete obj.data.pmap
 }
 $done({body: JSON.stringify(obj)});
