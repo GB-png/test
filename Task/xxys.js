@@ -29,7 +29,8 @@ if ($request.url.indexOf(path2) != -1){
 } 
 
 if ($request.url.indexOf(ad) != -1) {
-delete obj.data.iOS_adgroups;
-delete obj.data.sdkrows_iOS	
+obj.data.app_launch_type_adshow["iOS"] = "1"
+//delete obj.data.iOS_adgroups;
+//delete obj.data.sdkrows_iOS	
 }
 $done({body: JSON.stringify(obj)});
