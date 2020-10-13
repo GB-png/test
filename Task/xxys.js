@@ -32,7 +32,7 @@ if ($request.url.indexOf(ad) != -1) {
 delete obj.data.iOS_adgroups;
 delete obj.data.adgroups;
 delete obj.data.Android_adgroups;
-obj.data.app_launch_type_adshow["iOS"] = 1 
+obj.data.app_launch_type_adshow["iOS"] = "1" 
 //delete obj.data.sdkrows_iOS	
 }
 $done({body: JSON.stringify(obj)});
