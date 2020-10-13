@@ -19,7 +19,7 @@ if ($request.url.indexOf(path1) != -1){
 	obj.data.user["isvip"] = "1";
 	obj.data.user["goldcoin"] = "666";
 }
-if ($request.url.indexOf(path2) != -1){
+;if ($request.url.indexOf(path2) != -1){
 	obj.retcode = "0";
 	obj.data.lastplayindex = "1";
 	if(obj.data.hasOwnProperty("httpurl_preview")){
@@ -29,8 +29,6 @@ if ($request.url.indexOf(path2) != -1){
 }
 
 if ($request.url.indexOf(ad) != -1) {
-delete obj.data.iOS_adgroups;
-delete obj.data.adgroups;
-delete obj.data.Android_adgroups
+delete obj.data.iOS_adgroups
 }
 $done({body: JSON.stringify(obj)});
