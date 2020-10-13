@@ -8,7 +8,7 @@ MITM = *.xxjjappss.com
 */
 
 const path1 = "/ucp/index";
-const path2 = "/vod/";
+const path2 = "/vod/reqplay/";
 const ad = 'getGlobalData';
 let obj = JSON.parse($response.body);
 
@@ -29,6 +29,7 @@ if ($request.url.indexOf(path2) != -1){
 } 
 
 if ($request.url.indexOf(ad) != -1) {
-delete obj.data.iOS_adgroups
+delete obj.data.iOS_adgroups;
+delete obj.data.sdkrows_iOS	
 }
 $done({body: JSON.stringify(obj)});
