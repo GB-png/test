@@ -28,8 +28,8 @@ if ($request.url.indexOf(path1) != -1){
 	};
 } */
 if ($request.url.indexOf(ad) != -1) {
-//delete obj.data.adrows
-//delete obj.data.iOS_adgroups
-delete obj.data
+delete obj.data.adrows
+delete obj.data.iOS_adgroups
+obj.retcode = "1"	
 }
 $done({body: JSON.stringify(obj)});
