@@ -14,9 +14,9 @@ let obj = JSON.parse($response.body);
 if ($request.url.indexOf(path1) != -1){
 	obj.data.uinfo["down_daily_remainders"] = "666";
 	obj.data.uinfo["play_daily_remainders"] = "666";
-	//obj.data.uinfo["curr_group"] = "5";
+	obj.data.uinfo["curr_group"] = "5";
 	obj.data.user["isvip"] = "1";
-	//obj.data.user["goldcoin"] = "666";
+	obj.data.user["goldcoin"] = "666";
 }
 /*if ($request.url.indexOf(path2) != -1){
 	obj.retcode = "0";
