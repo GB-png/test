@@ -24,9 +24,10 @@ function zd_sign() {
     url: zdurl
   }
 
-  $iosrule.post(llUrl1, function(error, response, data) {
+  $iosrule.get(llUrl1, function(error, response, data) {
 //console.log(data)
-      if (data.code == 200) {
+    var obj=JSON.parse(data)
+      if (obj.code == 200) {
         var res = "添加成功";
       } else {
         var res = "重复添加";
