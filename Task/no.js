@@ -20,7 +20,7 @@ function zd() {
       subTitle = `添加结果: ✅`
       detail = `你似乎已经添加过了...`
     } 
-    pushmsg("种豆互助码"+"\n"+subTitle+"\n"detail)
+    pushmsg("种豆互助码"+"\n"+subTitle+"\n"+detail)
 
   })
 }
@@ -38,7 +38,7 @@ function nc() {
       subTitle = `添加结果: ✅`
       detail = `你似乎已经添加过了...`
     } 
-    pushmsg("农场互助码"+"\n"+subTitle+"\n"detail)
+    pushmsg("农场互助码"+"\n"+subTitle+"\n"+detail)
 
   })
 }
@@ -56,7 +56,7 @@ function mc() {
       subTitle = `添加结果: ✅`
       detail = `你似乎已经添加过了...`
     } 
-    pushmsg("萌宠互助码"+"\n"+subTitle+"\n"detail)
+    pushmsg("萌宠互助码"+"\n"+subTitle+"\n"+detail)
 
   })
 }
@@ -66,7 +66,7 @@ function pushmsg(r) {
   tx += r+"\n";
   console.log(r);
   console.log(n);
-    if (n == 3) GG.msg("京东互助码","",tx);
+    if (n == 2) GG.msg("京东互助码","",tx);
   
 }
 
@@ -76,7 +76,6 @@ function sign() {
 zd()
 nc() 
 mc()
-GG.done()
 }
 
 
