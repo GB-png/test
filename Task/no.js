@@ -3,7 +3,6 @@ const GG = init()
  const zdurl = { url: "http://api.turinglabs.net/api/v1/jd/bean/create/6wsk34xjsiwbwsukiyrer5dkaa5ac3f4ijdgqji/"}
  const ncurl = { url: "http://api.turinglabs.net/api/v1/jd/farm/create/d0dbcd0d7e6d40619c66c85b5807fdc8/"}
  const mcurl = { url: "http://api.turinglabs.net/api/v1/jd/pet/create/MTAxODcxOTI2NTAwMDAwMDAyOTE0MjU5OQ==/"}
- const n =0
  
 sign()
 
@@ -20,7 +19,7 @@ function zd() {
       subTitle = `添加结果: ✅`
       detail = `你似乎已经添加过了...`
     } 
-    pushmsg("种豆互助码"+"\n"+subTitle+"\n"+detail)
+    GG.msg("种豆互助码",subTitle,detail)
 
   })
 }
@@ -38,7 +37,7 @@ function nc() {
       subTitle = `添加结果: ✅`
       detail = `你似乎已经添加过了...`
     } 
-    pushmsg("农场互助码"+"\n"+subTitle+"\n"+detail)
+    GG.msg("农场互助码",subTitle,detail)
 
   })
 }
@@ -56,26 +55,16 @@ function mc() {
       subTitle = `添加结果: ✅`
       detail = `你似乎已经添加过了...`
     } 
-    pushmsg("萌宠互助码"+"\n"+subTitle+"\n"+detail)
+   GG.msg("萌宠互助码",subTitle,detail)
 
   })
 }
-
-function pushmsg(r) {
-  n++;
-  tx += r+"\n";
-  console.log(r);
-  console.log(n);
-    if (n == 2) GG.msg("京东互助码","",tx);
-  
-}
-
-
 
 function sign() {
 zd()
 nc() 
 mc()
+GG.done()
 }
 
 
