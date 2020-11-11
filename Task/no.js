@@ -21,7 +21,7 @@ zd_sign()
 
 function zd_sign() {
   const llUrl1 = {
-    url: zdreurl
+    url: zdurl
   }
 
   $iosrule.post(llUrl1, function(error, response, data) {
