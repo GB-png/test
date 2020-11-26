@@ -22,9 +22,11 @@ function createZd() {
         const obj = JSON.parse(data)
         if (obj.code == 200) {
           $.result.push("种豆互助码添加成功✅")
+	$.log("种豆互助码添加成功✅")
         }else
 		if(obj.code == 400) {
           $.result.push("种豆互助码已存在")
+	  $.log("种豆互助码已存在")
         }else{
           $.result.push("种豆互助码添加异常")
         }
