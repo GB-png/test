@@ -23,6 +23,7 @@ $.result = []
   await createDd()
   await createJx()
   await showMsg()
+  await $.done()
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done())
