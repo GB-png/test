@@ -6,6 +6,7 @@
 
 
 const $ = new Env('东哥家互助码')
+const notify = $.isNode() ? require('./sendNotify') : '';
 $.zdUrl = 'http://api.turinglabs.net/api/v1/jd/bean/create/6wsk34xjsiwbwsukiyrer5dkaa5ac3f4ijdgqji/'  // 种豆得豆
 $.ncUrl = 'http://api.turinglabs.net/api/v1/jd/farm/create/d0dbcd0d7e6d40619c66c85b5807fdc8/'  // 农场
 $.mcUrl = 'http://api.turinglabs.net/api/v1/jd/pet/create/MTAxODcxOTI2NTAwMDAwMDAyOTE0MjU5OQ==/'  // 萌宠
