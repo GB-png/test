@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 企鹅读书
+name: 爱奇艺
 
 on:
   workflow_dispatch:
@@ -27,12 +27,12 @@ jobs:
         run: |
           cd ~/JavaScript
           npm install
-      - name: '运行 【企鹅读书】'
+      - name: '运行 【爱奇艺】'
         run: |
           cd ~/JavaScript
           node function/iqiyi.js
         env:
-          
+          iQIYI_COOKIE: ${{ secrets.iQIYI_COOKIE }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
