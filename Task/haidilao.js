@@ -27,10 +27,10 @@ function getcookie() {
 }
    
 function sign() {
-  const signurlVal = hdl.getdata(signurlKey)
-  const signheaderVal = hdl.getdata(signheaderKey)
-  const signbodyVal = hdl.getdata(signbodyKey)
-  const url = { url: signurlVal, headers: JSON.parse(signheaderVal), body: signbodyVal }
+    const signurlVal = "https://activity-1.m.duiba.com.cn/signactivity/doSign"
+  const signheaderVal = {"X-Requested-With":"XMLHttpRequest","Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","Content-Type":"application/x-www-form-urlencoded","Origin":"https://activity-1.m.duiba.com.cn","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Haidilao/7.5.0 (iPhone iPhone10,3 iOS 13.5.1)","Cookie":"acw_tc=76b20ffa15935955115121295e4f827dc9c8c6b709f175d4dbc5c6b81ff481; _ac=eyJhaWQiOjQ3NjYzLCJjaWQiOjMxODE1NjY4OTl9; createdAtToday=false; dcustom=avatar%3D%2Fapp%2Fuser%2Fheader%2F6654F258E19F4EB182AC7DADD4294A58-1242-1242.jpg%26nickname%3D0000df; isNotLoginUser=false; tokenId=35f4743429c6f2b1afdcfca756a8cd6d; w_ts=1593595510852; wdata3=6S11GWi9qThCGUqZfhd7EGDChc4rASwJLfVm3r24C8jT34xHxVx5vMVKVuqf4WmkUAHtTYXyEZeBqBsPm4zcoFgdq312u5tgTeLRbL9eeR4KB3FTV6ZkGCSpKRXA2MKBioMJQ; wdata4=ORzZOo8tJmnC1sl3bbPnxZ5D8lnFpMCO3tKZlRL3DddQeyg7hcbE1d1AoWeY9u+gLw7666eUa9cS27DlcQJR6GvYENxUsk3jF9/km5nydLfVvw8BI01nP9QwGtsJo1PNsySAgaAa4wTZmzFMvmNw/A==","Host":"activity-1.m.duiba.com.cn","Referer":"https://activity-1.m.duiba.com.cn/signpet/index?activityId=27&from=login&spm=47663.1.1.1","Accept-Language":"zh-cn","Accept":"application/json","Content-Length":"20"}
+  const signbodyVal = "id=524&signActType=2"
+   const url = { url: signurlVal, headers: JSON.parse(signheaderVal), body: signbodyVal }
   hdl.post(url, (error, response, data) => {
     hdl.log(`${cookieName}, data: ${data}`)
     const title = `${cookieName}`
