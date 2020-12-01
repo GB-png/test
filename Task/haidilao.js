@@ -32,8 +32,8 @@ function sign() {
   const signbodyVal = "id=524&signActType=2"
   const url = { url: signurlVal, headers: signheaderVal, body: signbodyVal }
   hdl.post(url, (error, response, data) => {
-    hdl.log(`${cookieName}, data: ${data}`)
-    const title = `${cookieName}`
+    hdl.log(data)
+    const title = cookieName
     let subTitle = ''
     let detail = ''
     const result = JSON.parse(data)
