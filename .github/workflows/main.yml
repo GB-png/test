@@ -35,9 +35,9 @@ jobs:
           node Task/HDL.js
         env:
           HDL_HILH: ${{ secrets.HDL_HILH }}
-          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          HDL_HILB: ${{ secrets.HDL_HILB }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
-          BARK_SOUND: ${{ secrets.BARK_SOUND }}
+          HDL_HICH: ${{ secrets.HDL_HICH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
