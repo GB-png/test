@@ -1,6 +1,6 @@
 const $ = new Env('海底捞');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const hdlhd =''
+let hdlhd =''
 
 
 !(async () => {
