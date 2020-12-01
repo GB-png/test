@@ -32,7 +32,7 @@ jobs:
         run: | 
           cd ~/scripts
           npm install 
-          node Task/HDL.js
+          node Task/haidilao.js
         env:
           HDL_HILH: ${{ secrets.HDL_HILH }}
           HDL_HILB: ${{ secrets.HDL_HILB }}
