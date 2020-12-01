@@ -36,10 +36,13 @@ const CheckinURL = 'https://activity-1.m.duiba.com.cn/signactivity/doSign'
 const SignURL = 'https://activity-1.m.duiba.com.cn/customActivity/haidilao/signpet/feed'
 const ResultURL = 'https://activity-1.m.duiba.com.cn/signpet/getPetsInfo?activityId=27'
 const TokenName = '海底捞等级'
-const TokenHeaderKey = 'hilh'
-const TokenBodyKey = 'hilb'
+var hilh =''
+var hilb =''
+var hich =''
+const TokenHeaderKey = ''
+const TokenBodyKey = ''
 const CookieName = '海底捞签到'
-const CookieHeaderKey = 'hich'
+const CookieHeaderKey = ''
 const datainfo = {}
 const $cmp = compatibility()
 
@@ -112,9 +115,9 @@ function GetLevel() {
             url: LevelURL,
             headers: {
                 "Content-Type": "application/json; charset=UTF-8",
-                "Cookie": $cmp.read('hilh'),
+                "Cookie": hilh,
             },
-            body: $cmp.read("hilb")
+            body: hilb
         }
         $cmp.post(HiLevel, function (error, response, data) {
             try {
@@ -136,9 +139,9 @@ function GetCoin() {
             url: CoinURL,
             headers: {
                 "Content-Type": "application/json; charset=UTF-8",
-                "Cookie": $cmp.read('hilh'),
+                "Cookie": hilh,
             },
-            body: $cmp.read("hilb")
+            body: hilb
         }
         $cmp.post(HiCoin, function (error, response, data) {
             try {
@@ -159,7 +162,7 @@ function Checkin() {
             url: CheckinURL,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
-                "Cookie": $cmp.read("hich"),
+                "Cookie": hich,
                 "Referer": "https://activity-1.m.duiba.com.cn/signpet/index?activityId=27&from=login&spm=47663.1.1.1",
             },
             body: "id=524&signActType=2"
@@ -198,7 +201,7 @@ function GetData() {
         let HiData = {
             url: ResultURL,
             headers: {
-                "Cookie": $cmp.read("hich")
+                "Cookie": hich
             }
         }
         $cmp.get(HiData, function (error, response, data) {
@@ -226,7 +229,7 @@ function Usebonus() {
             url: SignURL,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
-                "Cookie": $cmp.read("hich"),
+                "Cookie": hich,
                 "Referer": "https://activity-1.m.duiba.com.cn/signpet/index?activityId=27&from=login&spm=47663.1.1.1",
             },
             body: "petId=" + datainfo.petid + "&activityId=27"
