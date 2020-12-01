@@ -38,7 +38,7 @@ async function deleteFile(path) {
 }
 
 async function start() {
-    if (!KEY) {
+    if (!KEY1) {
         console.log('请填写 key 后在继续')
         return
     }
@@ -59,14 +59,14 @@ async function start() {
 
     if(SEND_KEY) {
         if (content.includes("Cookie")) {
-            await notify.sendNotify("爱奇艺签到-" + new Date().toLocaleDateString(), content);
-            console.log("爱奇艺签到-" + content)
+            await notify.sendNotify("海底捞签到-" + new Date().toLocaleDateString(), content);
+            console.log("海底捞签到-" + content)
         }else{
-            console.log("爱奇艺签到-" + content)
+            console.log("海底捞签到-" + content)
         }
     }else{
-        await notify.sendNotify("爱奇艺签到-" + new Date().toLocaleDateString(), content);
-        console.log("爱奇艺签到-" + content)
+        await notify.sendNotify("海底捞签到-" + new Date().toLocaleDateString(), content);
+        console.log("海底捞签到-" + content)
     }
 
     //运行完成后，删除下载的文件
