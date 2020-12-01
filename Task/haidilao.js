@@ -32,7 +32,7 @@ function sign() {
   const signbodyVal = "id=524&signActType=2"
   const url = { url: signurlVal, headers: signheaderVal, body: signbodyVal }
   hdl.post(url, (error, response, data) => {
-    hdl.log(data)
+    hdl.AnError(data)
     const title = cookieName
     let subTitle = ''
     let detail = ''
