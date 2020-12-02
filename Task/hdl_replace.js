@@ -28,9 +28,9 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.myReplace(`$cmp.read("hilh")`, JSON.stringify(cookie.split("@")[0]))
-    content = content.myReplace(`$cmp.read("hilb")`, JSON.stringify(cookie.split("@")[1]))
-    content = content.myReplace(`$cmp.read("hich")`, JSON.stringify(cookie.split("@")[2]))
+    content = content.myReplace(`$cmp.read("hilh")`, cookie.split("@")[0])
+    content = content.myReplace(`$cmp.read("hilb")`, cookie.split("@")[1])
+    content = content.myReplace(`$cmp.read("hich")`, cookie.split("@")[2])
     //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
