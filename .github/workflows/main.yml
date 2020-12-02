@@ -32,12 +32,11 @@ jobs:
         run: | 
           cd ~/scripts
           npm install 
-          node Task/haidilao.js
+          node Task/hdl_replace.js
         env:
-          HDL_HILH: ${{ secrets.HDL_HILH }}
-          HDL_HILB: ${{ secrets.HDL_HILB }}
+          COOKIE_HDL: ${{ secrets.COOKIE_HDL }}
+          SyncUrl: ${{ secrets.SyncUrl }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
-          HDL_HICH: ${{ secrets.HDL_HICH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
