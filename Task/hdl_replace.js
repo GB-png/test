@@ -28,13 +28,13 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-   await content = content.replace(`$cmp.read("hilh")`, JSON.stringify(cookie.split("@")[0]))
-   await content = content.replace(`$cmp.read("hilh")`, JSON.stringify(cookie.split("@")[0]))
-    await content = content.replace(`$cmp.read("hilb")`, JSON.stringify(cookie.split("@")[1]))
-	await content = content.replace(`$cmp.read("hilb")`, JSON.stringify(cookie.split("@")[1]))
-    await content = content.replace(`$cmp.read("hich")`, JSON.stringify(cookie.split("@")[2]))
-	await content = content.replace(`$cmp.read("hich")`, JSON.stringify(cookie.split("@")[2]))
-	await content = content.replace(`$cmp.read("hich")`, JSON.stringify(cookie.split("@")[2]))
+   content = content.replace(`$cmp.read("hilh")`, JSON.stringify(cookie.split("@")[0]))
+   content = content.replace(`$cmp.read("hilh")`, JSON.stringify(cookie.split("@")[0]))
+   content = content.replace(`$cmp.read("hilb")`, JSON.stringify(cookie.split("@")[1]))
+content = content.replace(`$cmp.read("hilb")`, JSON.stringify(cookie.split("@")[1]))
+content = content.replace(`$cmp.read("hich")`, JSON.stringify(cookie.split("@")[2]))
+ content = content.replace(`$cmp.read("hich")`, JSON.stringify(cookie.split("@")[2]))
+content = content.replace(`$cmp.read("hich")`, JSON.stringify(cookie.split("@")[2]))
     //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
