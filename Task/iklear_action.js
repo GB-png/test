@@ -110,7 +110,7 @@ async function IKLEARsign() {
 function sign() {
   return new Promise((resolve, reject) => {
   const iklearurl = { url: signurlVal, headers: JSON.parse(signheaderVal)}
-    $.get(iklearrl, (error, response, data) => {
+    $.get(iklearurl, (error, response, data) => {
     $.log(`${cookieName}, 用户名: ${data}`)
       const result = JSON.parse(data)
 if (result.code == 0 && result.msg == "ok") {
