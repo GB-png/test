@@ -51,6 +51,7 @@ function getNodeCookie() {
       } else {
         IKLEAR_HEADER_VAL = [process.env.IKLEAR_HEADER_VAL];
       }
+    }	
 	  if (process.env.IKLEAR_URL_VAL) {
       if (process.env.IKLEAR_URL_VAL.indexOf('@') > -1) {
         console.log(`您的IKLEAR_URL_VAL选择的是用@隔开\n`)
