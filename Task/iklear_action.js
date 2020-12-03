@@ -98,6 +98,7 @@ async function IKLEARsign() {
       continue
     }
     signheaderVal = IKLEAR_COOKIES[i]['signheaderVal'];
+signurlVal = IKLEAR_COOKIES[i]['signurlVal'];
 
    
     await sign();//签到
