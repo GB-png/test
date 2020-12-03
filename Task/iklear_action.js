@@ -34,7 +34,7 @@ const signurlKey = 'senku_signurl_iklear'
 const signheaderKey = 'senku_signheader_iklear'
 
 const signurlVal = 'https://shop42867343.youzan.com/wscump/checkin/checkin.json?checkin_id=7713&kdt_id=42675175'
-const signheaderVal = senku.getdata(signheaderKey)
+//const signheaderVal = senku.getdata(signheaderKey)
 
 //云函数使用在下面填写
 let IKLEAR_COOKIES = [
