@@ -1,5 +1,5 @@
 {
-  "name": "My-Actions",
+  "name": "GB-png",
   "version": "1.0.0",
   "description": "",
   "main": "Manga.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BlueskyClouds/My-Actions.git"
+    "url": "git+https://github.com/GB-png/test.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BlueskyClouds/My-Actions/issues"
+    "url": "https://github.com/GB-png/test/issues"
   },
-  "homepage": "https://github.com/BlueskyClouds/My-Actions#readme",
+  "homepage": "https://github.com/GB-png/test#readme",
   "dependencies": {
     "download": "^8.0.0",
     "request": "^2.88.2",
