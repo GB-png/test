@@ -22,8 +22,8 @@ async function changeFiele () {
     let content = await fs.readFileSync('./DiDi_new.js', 'utf8')
 
 	//content = content.replace(/\$\.notify/g, "notify.sendNotify")
-    content = content.replace(/\$\.read\("#DiDi"\)/g, `${KEY}`)
-    content = content.replace(/\$\.read\("#DiDi_city"\)/g, `${KEY1}`)
+    content = content.replace(/\$\.read\("#DiDi"\)/, `${KEY}`)
+    content = content.replace(/\$\.read\("#DiDi_city"\)/, `${KEY1}`)
 	
     await fs.writeFileSync( './DiDi_new.js', content, 'utf8')
 }
