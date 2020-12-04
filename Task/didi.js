@@ -20,10 +20,10 @@ async function downFile () {
 
 async function changeFiele () {
     let content = await fs.readFileSync('./DiDi_new.js', 'utf8')
-    content = content.replace(/var cookie = ''/, `var cookie = '${KEY}'`)
-	content = content.replace(/\$\.notify/g, "notify.sendNotify")
+
+	//content = content.replace(/\$\.notify/g, "notify.sendNotify")
     content = content.replace(/\$\.read\("#DiDi"\)/g, `${KEY}`)
-    content = content.replace(/\$\.read\("#DiDi_city"\)/g, `${KEY}`)
+    content = content.replace(/\$\.read\("#DiDi_city"\)/g, `${KEY1}`)
 	
     await fs.writeFileSync( './DiDi_new.js', content, 'utf8')
 }
