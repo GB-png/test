@@ -9,9 +9,12 @@ const download = require('download')
 const $ = new Env('滴滴签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
 // 公共变量
-const KEY = process.env.COOKIE_DIDI
-const KEY1 = process.env.DIDI_CITY
-const SEND_KEY = process.env.SEND_KEY
+const Secrets = {
+    COOKIE_DIDI: process.env.COOKIE_DIDI,
+    DIDI_CITY: process.env.process.env.DIDI_CITY,
+    SEND_KEY = process.env.SEND_KEY,
+};
+
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/zZPiglet/Task/master/DiDi/DiDi_new.js'
@@ -22,8 +25,8 @@ async function changeFiele () {
     let content = await fs.readFileSync('./DiDi_new.js', 'utf8')
 
 	//content = content.replace(/\$\.notify/g, "notify.sendNotify")
-    content = content.replace(/\$\.read\("#DiDi"\)/, `${KEY}`)
-    content = content.replace(/\$\.read\("#DiDi_city"\)/, `${KEY1}`)
+    content = content.replace(/\$\.read\("#DiDi"\)/g, JSON.stringify(Secrets.COOKIE_DIDI))
+    content = content.replace(/\$\.read\("#DiDi_city"\)/g, JSON.stringify(Secrets.DIDI_CITY))
 	
     await fs.writeFileSync( './DiDi_new.js', content, 'utf8')
 }
@@ -58,7 +61,7 @@ async function start() {
         content = fs.readFileSync(path, "utf8");
     }
 
-    if(SEND_KEY) {
+    if(SecretsS.END_KEY) {
         if (content.includes("Cookie")) {
             await notify.sendNotify("滴滴签到-" + new Date().toLocaleDateString(), content);
             console.log("滴滴签到-" + content)
