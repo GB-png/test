@@ -11,7 +11,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 // 公共变量
 const Secrets = {
     COOKIE_DIDI: process.env.COOKIE_DIDI,
-    DIDI_CITY: process.env.process.env.DIDI_CITY,
+    DIDI_CITY: process.env.DIDI_CITY,
 };
 
 
