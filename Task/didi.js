@@ -12,7 +12,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const Secrets = {
     COOKIE_DIDI: process.env.COOKIE_DIDI,
     DIDI_CITY: process.env.process.env.DIDI_CITY,
-    SEND_KEY = process.env.SEND_KEY,
+	SEND_KEY = process.env.SEND_KEY,
 };
 
 
@@ -42,7 +42,7 @@ async function deleteFile(path) {
 }
 
 async function start() {
-    if (!KEY) {
+    if (!Secrets.COOKIE_DIDI) {
         console.log('请填写 key 后在继续')
         return
     }
@@ -61,17 +61,8 @@ async function start() {
         content = fs.readFileSync(path, "utf8");
     }
 
-    if(SecretsS.END_KEY) {
-        if (content.includes("Cookie")) {
-            await notify.sendNotify("滴滴签到-" + new Date().toLocaleDateString(), content);
-            console.log("滴滴签到-" + content)
-        }else{
-            console.log("滴滴签到-" + content)
-        }
-    }else{
-        await notify.sendNotify("滴滴签到-" + new Date().toLocaleDateString(), content);
+await notify.sendNotify("滴滴签到-" + new Date().toLocaleDateString(), content);
         console.log("滴滴签到-" + content)
-    }
 
     //运行完成后，删除下载的文件
     console.log('运行完成后，删除下载的文件\n')
