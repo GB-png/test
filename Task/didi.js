@@ -12,7 +12,6 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const Secrets = {
     COOKIE_DIDI: process.env.COOKIE_DIDI,
     DIDI_CITY: process.env.process.env.DIDI_CITY,
-	SEND_KEY = process.env.SEND_KEY,
 };
 
 
