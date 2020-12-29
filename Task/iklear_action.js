@@ -113,8 +113,9 @@ function sign() {
   return new Promise((resolve, reject) => {
   const iklearurl = { url: signurlVal, headers: JSON.parse(signheaderVal)}
     $.get(iklearurl, (error, response, data) => {
-$.log(data)
+
       const result = JSON.parse(data)
+      $.log(result)
 if (result.code == 0 && result.msg == "ok") {
       const times = result.data.times
       const points = result.data.prizes[0].points
