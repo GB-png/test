@@ -10,7 +10,7 @@ console.log(`\n========= 脚本执行时间(TM)：${new Date(new Date().getTime(
 let IKLEAR_COOKIES = [
   {
     "signurlVal": "",
-    "signheaderVal": "dfp=e58f32771866281f1edb37714b93544b; rdfp=e58f32771866281f1edb37714b93544b; yz_log_seqb=1602288324402; yz_log_seqn=26; loc_dfp=fce7ac791bbfa89bdf6ab2ac402d8b91; _kdt_id_=42675175; yz_ep_page_track=GKh8RrMGxR%2F0TMj8Ya%2BpoA%3D%3D; yz_ep_page_type_track=iDJ3GNJDHbhHtOl6W3j3ZA%3D%3D; yz_ep_view_track=Njej6j4A3C0pDmG4laAASg%3D%3D; trace_sdk_context_is_share=1; Hm_lvt_679ede9eb28bacfc763976b10973577b=1600838068; yz_log_ftime=1597135892634; yz_log_uuid=83e63433-5e52-eea1-3caa-4a6e38727c56; KDTSESSIONID=YZ742787294759006208YZB9jttVnP; nobody_sign=YZ742787294759006208YZB9jttVnP"
+    "signheaderVal": "",
   }
 ]
 function getNodeCookie() {
