@@ -1,31 +1,6 @@
-/*
-iklear是美国显示器清洁品牌，Apple Store官方在使用的清洁产品，脚本可签到iklear官方微商城获取积分，兑换iklear清洁产品。目前不知未购买过iklear产品的用户是否可以登录商城签到领积分，如有测试结果还望反馈一下，感谢。
-@LJJJia 根据 @GideonSenku 大佬的教程，通过修改 @chavyleung 大佬的签到脚本而成，本意自用，放出来各位有需求的使用，感谢各位大佬的mode和教程。
-使用方法：
-添加 MITM,添加 SCRIPT,自行修改所需task执行时间。
-获取cookie方法：
-浏览器打开iklear官方微商城h5，链接：
-https://shop42867343.m.youzan.com/v2/feature/koy4ThfGd6
-点击我的订单 => 右上角“签到” => 签到，提示 “🎉获取Cookie: 成功” 即可使用checkin脚本自动签到。
-[MITM]
-hostname = shop42867343.youzan.com
-**Surge**
-[Script]
-iklear_cookie = type=http-request,pattern=^https:\/\/shop42867343\.youzan\.com\/wscump\/checkin\/checkin\.json,script-path=https://raw.githubusercontent.com/LJJJia/script/master/iklear/iklear_cookie.js
-iklear_checkin = type=cron,cronexp=0 0 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/LJJJia/script/master/iklear/iklear_checkin.js
-**QuanX**
-[rewrite_local]
-^https:\/\/shop42867343\.youzan\.com\/wscump\/checkin\/checkin\.json url script-request-header https://raw.githubusercontent.com/LJJJia/script/master/iklear/iklear_cookie.js
-[task_local]
-0 0 * * * https://raw.githubusercontent.com/LJJJia/script/master/iklear/iklear_checkin.js, tag=iklear_checkin, enabled=true
-**Loon**
-[Script]
-http-request ^https:\/\/shop42867343\.youzan\.com\/wscump\/checkin\/checkin\.json script-path=https://raw.githubusercontent.com/LJJJia/script/master/iklear/iklear_cookie.js, timeout=10, tag=iklear_cookie
-cron "0 0 * * *" script-path=https://raw.githubusercontent.com/LJJJia/script/master/iklear/iklear_checkin.js, tag=iklear_checkin
-*/
 const cookieName = 'IKlear微商城'
 const $ = Env(cookieName)
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = require('./sendNotify');
 let result = ''
 var tz = ''
 console.log(`\n========= 脚本执行时间(TM)：${new Date(new Date().getTime() + 0 * 60 * 60 * 1000).toLocaleString('zh', {hour12: false})} =========\n`)
@@ -35,12 +10,12 @@ console.log(`\n========= 脚本执行时间(TM)：${new Date(new Date().getTime(
 let IKLEAR_COOKIES = [
   {
     "signurlVal": "",
-    "signheaderVal": ""
+    "signheaderVal": "dfp=e58f32771866281f1edb37714b93544b; rdfp=e58f32771866281f1edb37714b93544b; yz_log_seqb=1602288324402; yz_log_seqn=26; loc_dfp=fce7ac791bbfa89bdf6ab2ac402d8b91; _kdt_id_=42675175; yz_ep_page_track=GKh8RrMGxR%2F0TMj8Ya%2BpoA%3D%3D; yz_ep_page_type_track=iDJ3GNJDHbhHtOl6W3j3ZA%3D%3D; yz_ep_view_track=Njej6j4A3C0pDmG4laAASg%3D%3D; trace_sdk_context_is_share=1; Hm_lvt_679ede9eb28bacfc763976b10973577b=1600838068; yz_log_ftime=1597135892634; yz_log_uuid=83e63433-5e52-eea1-3caa-4a6e38727c56; KDTSESSIONID=YZ742787294759006208YZB9jttVnP; nobody_sign=YZ742787294759006208YZB9jttVnP"
   }
 ]
 function getNodeCookie() {
   if ($.isNode()) {
-    let IKLEAR_HEADER_VAL = [], QQ_READ_TIME_URL_VAL = [], QQ_READ_TIME_HEADER_VAL = [];
+    let IKLEAR_HEADER_VAL = [];
     if (process.env.IKLEAR_HEADER_VAL) {
       if (process.env.IKLEAR_HEADER_VAL.indexOf('@') > -1) {
         console.log(`您的IKLEAR_HEADER_VAL选择的是用@隔开\n`)
@@ -103,18 +78,30 @@ signurlVal = IKLEAR_COOKIES[i]['signurlVal'];
 
    
     await sign();//签到
+    await getPoints();//查询积分
     await showmsg();//通知
   }
 }
 
-
-
 function sign() {
   return new Promise((resolve, reject) => {
-  const iklearurl = { url: signurlVal, headers: JSON.parse(signheaderVal)}
+  const iklearurl = { url: "https://shop42867343.youzan.com/wscump/checkin/checkin.json?checkin_id=7713&kdt_id=42675175", 
+    headers:{
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cookie": signheaderVal,
+      "Connection": "keep-alive",
+      "Referer": "https://shop42867343.youzan.com/wscump/checkin/result?kdt_id=42675175",
+      "Accept": "application/json, text/plain, */*",
+      "Host": "shop42867343.youzan.com",
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.17(0x17001124) NetType/4G Language/zh_CN",
+      "Accept-Language": "zh-cn"
+    } 
+  }
     $.get(iklearurl, (error, response, data) => {
+//    $.log(`${cookieName}, 用户名: ${data}`)
 
       const result = JSON.parse(data)
+      console.log(result)
 if (result.code == 0 && result.msg == "ok") {
       const times = result.data.times
       const points = result.data.prizes[0].points
@@ -132,6 +119,29 @@ if (result.code == 0 && result.msg == "ok") {
       $.log(data)
     }
 
+      resolve()
+    })
+  })
+}
+
+function getPoints() {
+  return new Promise((resolve, reject) => {
+  const getPointsurl = { url: 'https://shop42867343.youzan.com/wscump/pointstore/getCustomerPoints.json', 
+    headers:{
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cookie": signheaderVal,
+      "Connection": "keep-alive",
+      "Referer": "https://shop42867343.youzan.com/wscump/checkin/result?kdt_id=42675175",
+      "Accept": "application/json, text/plain, */*",
+      "Host": "shop42867343.youzan.com",
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.17(0x17001124) NetType/4G Language/zh_CN",
+      "Accept-Language": "zh-cn"
+    } 
+  }
+    $.get(getPointsurl, (error, response, data) => {
+//    $.log(`${cookieName}, 用户名: ${data}`)
+      const result = JSON.parse(data)
+      tz +=`您共有${result.data.currentAmount}积分`
       resolve()
     })
   })
