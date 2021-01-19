@@ -11,17 +11,18 @@ nodejs云端专用。可N个账号。by；GG
  HDL_COIN_VAL  ------》   coincookie
  HDL_SIGN_VAL  ------》   signcookie
 
- 
+
+
 hostname = superapp.kiwa-tech.com, activity-1.m.duiba.com.cn,
 
  Quantumult X
 [task_local]
-1 0 * * * https://raw.githubusercontent.com/zZPiglet/Task/master/Haidilao/HaidilaoUsebonus.js
+1 7 * * * https://raw.githubusercontent.com/GB-png/test/master/Task/haidilao.js
 
 [rewrite_local]
 
-^https:\/\/superapp\.kiwa-tech\.com\/app\/coupon\/customerLevelShow url script-request-body https://raw.githubusercontent.com/zZPiglet/Task/master/Haidilao/HaidilaoUsebonus.js
-^https:\/\/activity-1\.m\.duiba\.com\.cn\/signactivity\/getSignInfo url script-request-header https://raw.githubusercontent.com/zZPiglet/Task/master/Haidilao/HaidilaoUsebonus.js
+^https:\/\/superapp\.kiwa-tech\.com\/app\/coupon\/customerLevelShow url script-request-body https://raw.githubusercontent.com/GB-png/test/master/Task/haidilao.js
+^https:\/\/activity-1\.m\.duiba\.com\.cn\/signactivity\/getSignInfo url script-request-header https://raw.githubusercontent.com/GB-png/test/master/Task/haidilao.js
 
 
 1月19日 云函数、AC使用版本改写完成，增加自动收获锅底、自动添加锅底功能，集齐后可用于兑换 捞派滑牛（半份）
