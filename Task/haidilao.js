@@ -11,21 +11,26 @@ nodejs云端专用。可N个账号。by；GG
  HDL_COIN_VAL  ------》   coincookie
  HDL_SIGN_VAL  ------》   signcookie
 
+将下列重写添加至重写模块，进入"海底捞"app，提示获取查询CK和获取查询BD，手动签到一次或点击"签到"，若弹出"首次写入海底捞等级 Token 成功"及"首次写入海底捞签到 Cookie 成功"，查看运行日志，将3个变量复制到对应位置即可
+
+注意注意注意：第一次请人工添加2个或2个以上的锅底
 
 
 hostname = superapp.kiwa-tech.com, activity-1.m.duiba.com.cn,
 
- Quantumult X
-[task_local]
+###Quantumult X
+###[task_local]
 1 7 * * * https://raw.githubusercontent.com/GB-png/test/master/Task/haidilao.js
 
-[rewrite_local]
+###[rewrite_local]
 
 ^https:\/\/superapp\.kiwa-tech\.com\/app\/coupon\/customerLevelShow url script-request-body https://raw.githubusercontent.com/GB-png/test/master/Task/haidilao.js
 ^https:\/\/activity-1\.m\.duiba\.com\.cn\/signactivity\/getSignInfo url script-request-header https://raw.githubusercontent.com/GB-png/test/master/Task/haidilao.js
 
-
+更新日志：
 1月19日 云函数、AC使用版本改写完成，增加自动收获锅底、自动添加锅底功能，集齐后可用于兑换 捞派滑牛（半份）
+1月20日 新增签到状态判断
+1月21日 新增判断4个锅位是否均已添加，若无自动添加
 
  *****************************************************************************************************************
 
@@ -35,6 +40,7 @@ const $ = Env(cookieName)
 const notify = $.isNode() ? require("./sendNotify") : ``;
 const CoinURL = 'https://superapp.kiwa-tech.com/app/coinCommodity/getCoin'
 const CheckinURL = 'https://activity-1.m.duiba.com.cn/signactivity/doSign'
+const signinfoURL = 'https://activity-1.m.duiba.com.cn/signactivity/getSignInfo'
 const LevelURL = `https://superapp.kiwa-tech.com/app/coupon/customerLevelShow`
 const ResultURL = 'https://activity-1.m.duiba.com.cn/signpet/getPetsInfo?activityId=27'
 const feedURL ='https://activity-1.m.duiba.com.cn/customActivity/haidilao/signpet/feed'
@@ -155,9 +161,42 @@ function GetCookie() {
       signcookie = HDL_COOKIES[t]['signcookie'];
 
     await GetLevel();
-    await Checkin();
+    await Signinfo();
+    if($.obj0.signInfoVO.todaySigned == false){
+      await Checkin();
+    }if($.obj0.signInfoVO.todaySigned == true){
+      message+=`【签到信息】您今日已签到❎❎❎,`+`连续签到`+$.obj0.signInfoVO.continueDay+`天\n`
+    }
     await GetCoin();
     await GetData();
+    if($.obj4.data.pets.length < 4){
+      var petsopte = JSON.stringify($.obj4.data.pets)
+      if(petsopte.indexOf('haidilao_01') == -1){
+        petNO='haidilao_01'
+        i = 0
+        await Getopte()
+        await $.wait(2000)
+      } else if(petsopte.indexOf('haidilao_02') == -1){
+        petNO='haidilao_02'
+        i = 1
+        await Getopte()
+        await $.wait(2000)
+    } else if(petsopte.indexOf('haidilao_03') == -1){
+      petNO='haidilao_03'
+      i = 2
+      await Getopte()
+      await $.wait(2000)
+    }else if(petsopte.indexOf('haidilao_04') == -1){
+    petNO='haidilao_04'
+    i = 3
+    await Getopte()
+    await $.wait(2000)
+    }
+    
+    }
+
+
+
       for(i=0;i<$.obj4.data.pets.length;i++){
         ID =$.obj4.data.pets[i].id
         petNO =$.obj4.data.pets[i].identifier
@@ -219,6 +258,25 @@ function GetCookie() {
         })
     })
   }
+
+//签到状态查询
+function Signinfo() {
+  return new Promise((resolve, reject) => {
+    let Hiinfo = {
+      url: signinfoURL,
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Cookie": signcookie,
+      },
+      body: `signActivityId=524`
+  }
+    $.post(Hiinfo, (error, response, data) => {
+      $.obj0 = JSON.parse(data)
+      resolve()
+    })
+  })
+}
+
 //每日签到
   function Checkin() {
     return new Promise((resolve) => {
@@ -241,7 +299,7 @@ function GetCookie() {
             if($.obj3.success == false){
               message+=`【签到信息】您重复签到❌❌❌,`+`连续签到`+$.obj3.signInfoVO.continueDay+`天\n`
              }else if($.obj3.success == true){
-              message+=`【签到信息】签到成功✅✅✅\n`+`获得`+$.obj3.customInfo.foodNum+`柴火,连续签到`+$.obj3.signInfoVO.continueDay+`天\n`
+              message+=`【签到信息】签到成功✅✅✅`+`获得`+$.obj3.customInfo.foodNum+`柴火,连续签到`+$.obj3.signInfoVO.continueDay+`天\n`
              } 
             resolve ()
           }
