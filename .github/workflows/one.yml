@@ -1,0 +1,36 @@
+name: HDL
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "20 01 * * *"
+    watch:
+        types: [started]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: github.event.repository.owner.id == github.event.sender.id
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node.js 10.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10.x
+            - name: npm install
+              run: |
+                  npm install
+            - name: "运行【hdl】"
+              run: |
+                  node Task/haidilao.js
+              env:
+                  HDL_BODY_VAL: ${{ secrets.HDL_BODY_VAL }}
+                  HDL_COIN_VAL: ${{ secrets.HDL_COIN_VAL }}
+                  HDL_SIGN_VAL: ${{ secrets.HDL_SIGN_VAL }}
+                  BARK_PUSH: ${{ secrets.BARK_PUSH }}
+                  TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+                  TG_USER_ID: ${{ secrets.TG_USER_ID }}
+                  BARK_SOUND: ${{ secrets.BARK_SOUND }}
+                  DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
+                  DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+#最后推送 2020年11月25日
