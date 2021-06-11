@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # @Author   : Chiupam (https://t.me/chiupam)
-# @Data     : 2021-06-09 23:38
-# @Version  : v 2.5
-# @Updata   : 1. 修复下载 raw 链接文件的错误；2. 给机器人发送固定格式的消息可以快捷添加环境变量
+# @Data     : 2021-06-11 12:12
+# @Version  : v 2.7
+# @Updata   : 1. 新增环境变量可以给这个环境变量添加注释
 # @Future   :
 
 
@@ -99,7 +99,7 @@ async def myhello(event):
 
     仓库：https://github.com/chiupam/JD_Diy.git
     欢迎🌟Star & 提出🙋[isuss](https://github.com/chiupam/JD_Diy/issues/new) & 请勿🚫Fork
-    频道：[👬和东哥做兄弟](https://t.me/jd_diy_bot_channel) （不开放闲聊，仅讨论脚本）
+    频道：[👬和东哥做兄弟](https://t.me/joinchat/jVMMKYCMe_VkZDQ1) （限时开放以控制人数）
 """
         await asyncio.sleep(0.5)
         await jdbot.send_message(chat_id, diy_hello)
@@ -241,14 +241,18 @@ async def myupbot(event):
                 furl = f'https://raw.githubusercontent.com/chiupam/JD_Diy/master/jbot/{res}.py'
             conv.cancel()
         resp = requests.get(f'http://ghproxy.com/{furl}').text
-        if resp.find('404: Not Found') == -1:
+        if resp.find('#!/usr/bin/env python3') == -1:
+            resp = requests.get(f'https://mirror.ghproxy.com/{furl}').text
+        if resp.find('#!/usr/bin/env python3') == -1:
+            resp = requests.get(furl).text
+        if resp.find('#!/usr/bin/env python3') != -1:
             backfile(fpath)
             with open(fpath, 'w+', encoding='utf-8') as f:
                 f.write(resp)
             await jdbot.edit_message(msg, "准备重启机器人")
             os.system('pm2 restart jbot')
         elif resp.find('404: Not Found') != -1:
-            await jdbot.edit_message(msg, "下载失败，库还没开放")
+            await jdbot.edit_message(msg, "下载失败，库未开放或网络问题")
         else:
             await jdbot.edit_message(msg, "下载失败，请稍后重试")
     except Exception as e:
@@ -265,83 +269,116 @@ async def mydownload(event):
     """
     try:
         SENDER = event.sender_id
-        msg = await jdbot.send_message(chat_id, '开启下载文件会话')
+        start = await jdbot.send_message(chat_id, '开启下载文件会话')
         btn = [
             [Button.inline('我需要下载此链接文件，请继续', data='confirm')],
             [Button.inline('我不需要下载，请取消对话', data='cancel')]
         ]
         async with jdbot.conversation(SENDER, timeout=60) as conv:
-            await jdbot.delete_messages(chat_id, msg)
-            msg = await conv.send_message('检测到你发送了一条链接，请做出你的选择：\n')
-            msg = await jdbot.edit_message(msg, '检测到你发送了一条链接，请做出你的选择：', buttons=btn)
+            msg = await conv.send_message('检测到你发送了一条链接，请做出你的选择：\n', buttons=btn)
             convdata = await conv.wait_event(press_event(SENDER))
+            await jdbot.delete_messages(chat_id, msg)
             res = bytes.decode(convdata.data)
             if res == 'cancel':
-                msg = await jdbot.edit_message(msg, '对话已取消，感谢你的使用')
+                await jdbot.delete_messages(chat_id, start)
+                await jdbot.edit_message(msg, '对话已取消，感谢你的使用')
                 conv.cancel()
+                return
             else:
                 # 以下代码大部分参照原作者：@MaiKaDe666，并作出一定的修改
-                await jdbot.delete_messages(chat_id, msg)
                 furl = event.raw_text
                 if furl.startswith('https://raw.githubusercontent.com'):
                     furl = f'http://ghproxy.com/{furl}'
-                fname = furl.split('/')[-1]
                 resp = requests.get(furl).text
-                fname_cn = re.findall(r"(?<=new\sEnv\(').*(?=')", resp, re.M)
-                try:
-                    cron = re.search(r'(\d\s|\*\s){4}\*', resp).group()
-                except:
-                    cron = None
-                if fname_cn != []:
-                    fname_cn = fname_cn[0]
-                else:
-                    fname_cn = ''
-                btn = [
-                    [Button.inline('放入config目录', data=_ConfigDir),Button.inline('放入jbot/diy目录', data=f'{_JdbotDir}/diy')],
-                    [Button.inline('放入own目录', data=_DiyDir), Button.inline('放入own并运行', data='run_own')],
-                    [Button.inline('放入scripts目录', data=_ScriptsDir), Button.inline('放入scripts并运行', data='run_scripts')],
-                    [Button.inline('请帮我取消对话', data='cancel')]
-                ]
+                if resp.find("<html>") != -1:
+                    furl = event.raw_text
+                    resp = requests.get(f"https://mirror.ghproxy.com/{furl}").text
+                if resp.find("<html>") != -1:
+                    furl = event.raw_text
+                    resp = requests.get(furl).text
                 if resp:
-                    write = True
-                    cmdtext = None
-                    msg = await conv.send_message(f'成功下载{fname_cn}脚本\n现在，请做出你的选择：')
-                    msg = await jdbot.edit_message(msg, f'成功下载{fname_cn}脚本\n现在，请做出你的选择：', buttons=btn)
+                    fname = furl.split('/')[-1]
+                    fname_cn = re.findall(r"(?<=new\sEnv\(').*(?=')", resp, re.M) # ((\d\s|\*\s){4}\*|(?<=cron\s\").*(?=\*\"))
+                    try:
+                        cron = re.search(r'(\d\s|\*\s){4}\*', resp).group()
+                    except:
+                        cron = None
+                    if fname_cn != []:
+                        fname_cn = fname_cn[0]
+                    else:
+                        fname_cn = ''
+                    btn = [
+                        [Button.inline('放入config目录', data=_ConfigDir),Button.inline('放入jbot/diy目录', data=f'{_JdbotDir}/diy')],
+                        [Button.inline('放入own目录', data=_DiyDir), Button.inline('放入own并运行', data='run_own')],
+                        [Button.inline('放入scripts目录', data=_ScriptsDir), Button.inline('放入scripts并运行', data='run_scripts')],
+                        [Button.inline('请帮我取消对话', data='cancel')]
+                    ]
+                    write, cmdtext, addcron = True, None, True
+                    msg = await conv.send_message(f'成功下载{fname_cn}脚本\n现在，请做出你的选择：', buttons=btn)
                     convdata = await conv.wait_event(press_event(SENDER))
+                    await jdbot.delete_messages(chat_id, msg)
                     res = bytes.decode(convdata.data)
                     if res == 'cancel':
-                        write = False
-                        msg = await jdbot.edit_message(msg, '对话已取消，感谢你的使用')
+                        await jdbot.delete_messages(chat_id, start)
+                        msg = await jdbot.send_message(chat_id, '对话已取消，感谢你的使用')
+                        conv.cancel()
+                        return 
                     elif res == 'run_own':
                         path, cmdtext = f'{_DiyDir}/{fname}', f'{jdcmd} {_DiyDir}/{fname} now'
-                        await jdbot.edit_message(msg, f'{fname_cn}脚本已保存到own目录，并成功在后台运行，请稍后自行查看日志')
+                        await jdbot.send_message(chat_id, f'我已经把{fname_cn}脚本已保存到own目录\n再进行一些操作，我将运行它')
                     elif res == 'run_scripts':
                         path, cmdtext = f'{_ScriptsDir}/{fname}', f'{jdcmd} {_ScriptsDir}/{fname} now'
-                        await jdbot.edit_message(msg, f'{fname_cn}脚本已保存到scripts目录，并成功在后台运行，请稍后自行查看日志')
+                        await jdbot.send_message(chat_id, f'我已经把{fname_cn}脚本已保存到scripts目录\n再进行一些操作，我将运行它')
                     elif res == f'{_JdbotDir}/diy':
                         path = f'{res}/{fname}'
-                        await jdbot.edit_message(msg, f'机器人文件已保存到{res}目录\n请记得使用 /restart 指令重启机器人')
-                        cron = False
+                        await jdbot.send_message(chat_id, f'机器人文件已保存到{res}目录\n请记得使用 /restart 指令重启机器人')
+                        cron, addcron = False, False
                     else:
                         path = f'{res}/{fname}'
-                        await jdbot.edit_message(msg, f'{fname_cn}脚本已保存到{res}目录')
+                        await jdbot.send_message(chat_id, f'{fname_cn}脚本已保存到{res}目录')
                     if cron:
                         btn = [
                             [Button.inline('是的，请帮我添加定时任务', data='add')],
-                            [Button.inline('谢谢，但我暂时不需要', data='cancel')],
+                            [Button.inline('谢谢，但我有更好的想法', data='input')],
+                            [Button.inline('谢谢，但我暂时不需要', data='cancel')]
                         ]
-                        msg = await conv.send_message(f"这是我识别出来的 cron 表达式\n{cron}\n请问需要把它添加进定时任务中吗？")
-                        await jdbot.edit_message(msg, f"这是我识别出来的 cron 表达式\n{cron}\n请问需要把它添加进定时任务中吗？", buttons=btn)
+                        msg = await conv.send_message(f"这是我识别出来的 cron 表达式\n{cron}\n请问需要把它添加进定时任务中吗？", buttons=btn)
                         convdata = await conv.wait_event(press_event(SENDER))
+                        await jdbot.delete_messages(chat_id, msg)
                         res2 = bytes.decode(convdata.data)
-                        if res2 == 'add':
-                            cronfpath = f'{_ConfigDir}/crontab.list'
-                            with open(cronfpath, 'a', encoding='utf-8') as f:
-                                f.write(f'{cron} mtask {path}\n')
-                            await jdbot.edit_message(msg, '我已经把它添加进定时任务中了')
+                        if res2 == 'cancel':
+                            msg = await conv.send_message('那好吧，感谢你的使用')
+                            await asyncio.sleep(2)
+                            addcron = False
+                        elif res2 == 'input':
+                            msg = await conv.send_message("那请输入你所需的 cron 表达式")
+                            cron = await conv.get_response()
+                            cron = cron.raw_text
+                    else:
+                        btn = [
+                            [Button.inline("我要手动输入cron表达式", data="input")],
+                            [Button.inline("谢谢，但我暂时不需要", data='cancel')]
+                        ]
+                        msg = await conv.send_message("我没有识别出 cron 表达式\n请问你需要手动输入添加吗？", buttons=btn)
+                        convdata = await conv.wait_event(press_event(SENDER))
+                        await jdbot.delete_messages(chat_id, msg)
+                        res2 = bytes.decode(convdata.data)
+                        if res2 == 'cancel':
+                            msg = await conv.send_message('那好吧，感谢你的使用')
+                            await asyncio.sleep(2)
+                            addcron = False
                         else:
-                            await jdbot.edit_message(msg, '那好吧，会话结束，感谢你的使用')
+                            msg = await conv.send_message('那请输入你所需的 cron 表达式')
+                            cron = await conv.get_response()
+                            cron = cron.raw_text
+                    await jdbot.delete_messages(chat_id, msg)
+                    await jdbot.delete_messages(chat_id, start)
                     conv.cancel()
+                    if addcron:
+                        cronfpath = f'{_ConfigDir}/crontab.list'
+                        with open(cronfpath, 'a', encoding='utf-8') as f:
+                            f.write(f'{cron} mtask {path}\n')
+                        await jdbot.send_message(chat_id, "好的，我已经添加进定时任务中了")
                     if write:
                         backfile(path)
                         with open(path, 'w+', encoding='utf-8') as f:
@@ -349,10 +386,10 @@ async def mydownload(event):
                     if cmdtext:
                         await cmd(cmdtext)
                 else:
+                    conv.cancel()
                     await jdbot.delete_messages(chat_id, start)
                     msg = await conv.send_message('下载失败，请稍后重试')
                     await jdbot.edit_message(msg, '下载失败，请稍后重试')
-                    conv.cancel()
     except exceptions.TimeoutError:
         msg = await jdbot.send_message(chat_id, '选择已超时，对话已停止，感谢你的使用')
     except Exception as e:
@@ -457,20 +494,19 @@ async def myaddrepo(event):
         logger.error('something wrong,I\'m sorry\n' + str(e))
 
 
-@jdbot.on(events.NewMessage(from_users=chat_id, pattern=r'^export'))
-async def myaddrepo(event):
+@jdbot.on(events.NewMessage(from_users=chat_id, pattern=r'(^export.*|.*=(\".*\"|\'.*\'))'))
+async def myaddexport(event):
     """
     快捷添加额外的环境变量
     :param event:
     :return:
     """
     try:
-        None
         start = await jdbot.send_message(chat_id, '开始添加环境变量')
         SENDER = event.sender_id
         message = event.raw_text
-        kv = message.replace('export', '')
-        if len(kv) <= 1:
+        auto = False
+        if len(message.replace('export', '')) <= 1:
             async with jdbot.conversation(SENDER, timeout=180) as conv:
                 msg = await conv.send_message("检测到你没有设置环境变量的参数\n请回复你需要添加的环境变量的键名是什么？")
                 kname = await conv.get_response()
@@ -488,22 +524,31 @@ async def myaddrepo(event):
                     await jdbot.delete_messages(chat_id, start)
                     await jdbot.send_message(chat_id, '对话已取消，感谢你的使用')
                     conv.cancel()
-                    return 
+                    return
                 elif res == 'input':
                     msg = await conv.send_message("那请回复你所需要设置的值")
                     vname1 = await conv.get_response()
+                    await jdbot.delete_messages(chat_id, msg)
                     vname = vname1.raw_text
                 else:
                     vname = res
                 new = f'export {kname}="{vname}"'
                 msg = await conv.send_message(f"好的，请稍等\n你设置值为：{vname}")
                 conv.cancel()
+        elif (message.find("='") != -1 or message.find('="') != -1) and message.find("export") == -1:
+            new = message
+            kname = new.split('=')[0]
+            vname1 = new.split('=')[-1]
+            vname = re.sub(r"\'|\"", "", vname1)
+            auto = True
         else:
             new = message
             kv = new.replace("export ", "")
             kname = kv.split('=')[0]
             vname1 = kv.split('=')[-1]
             vname = re.sub(r"\'|\"", "", vname1)
+            auto = True
+        if auto:
             async with jdbot.conversation(SENDER, timeout=60) as conv:
                 btns = [
                     [Button.inline("是的，就是这样", data='yes')],
@@ -515,23 +560,45 @@ async def myaddrepo(event):
                 if res == 'cancel':
                     await jdbot.delete_messages(chat_id, start)
                     await jdbot.edit_message(msg, '对话已取消，感谢你的使用')
+                    conv.cancel()
+                    return
                 else:
                     await jdbot.delete_messages(chat_id, msg)
                     msg = await conv.send_message(f"好的，请稍等\n你设置变量为：{kname}={vname1}")
                 conv.cancel()
         with open(_ConfigFile, 'r', encoding='utf-8') as f1:
             configs = f1.read()
+        await asyncio.sleep(1.5)
+        await jdbot.delete_messages(chat_id, msg)
         if configs.find(kname) != -1:
-            configs = re.sub(f'{kname}="\S+"', f'{kname}="{vname}"\n', configs)
+            configs = re.sub(f'{kname}=(\"|\')\S+(\"|\')', f'{kname}="{vname}"', configs)
             end = "替换环境变量成功"
         else:
-            configs += f'export {kname}="{vname}"\n'
+            async with jdbot.conversation(SENDER, timeout=60) as conv:
+                btns = [
+                    [Button.inline("是的，我需要", data='yes')],
+                    [Button.inline("谢谢，但我暂时不需要", data='cancel')]
+                ]
+                msg = await conv.send_message(f"这个环境变量是新增的，需要我给他添加注释嘛？", buttons=btns)
+                convdata = await conv.wait_event(press_event(SENDER))
+                await jdbot.delete_messages(chat_id, msg)
+                res = bytes.decode(convdata.data)
+                if res == 'cancel':
+                    msg = await conv.send_message("那好吧，准备新增变量")
+                    note = ''
+                else:
+                    msg = await conv.send_message("那请回复你所需要添加的注释")
+                    note = await conv.get_response()
+                    await jdbot.delete_messages(chat_id, msg)
+                    note = f" # {note.raw_text}"
+                conv.cancel()
+            configs += f'export {kname}="{vname}"{note}\n'
+            await asyncio.sleep(1.5)
+            await jdbot.delete_messages(chat_id, msg)
             end = "新增环境变量成功"
         with open(_ConfigFile, 'w', encoding='utf-8') as f2:
             f2.write(configs)
         await jdbot.delete_messages(chat_id, start)
-        await asyncio.sleep(2)
-        await jdbot.delete_messages(chat_id, msg)
         await jdbot.send_message(chat_id, end)
     except Exception as e:
         await jdbot.send_message(chat_id, 'something wrong,I\'m sorry\n' + str(e))
