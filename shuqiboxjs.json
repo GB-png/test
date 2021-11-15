@@ -1,0 +1,71 @@
+{
+    "id": "ziye.shuqiapp.sub",
+    "name": "ziye 书旗专用订阅",
+    "author": "@ZIYE",
+    "icon": "https://cdn.jsdelivr.net/gh/ziye888/JavaScript@main/ziye.png",
+    "repo": "https://github.com/ziye888",
+    "apps": [{
+        "id": "shuqiappsss",
+        "name": "书旗小说APP",
+        "keys": ["shuqisyurl", "shuqisybody", "shuqisyzjurl", "shuqispbody", "shuqirwbody", "shuqisprwurl", "shuqisqjlbody", "shuqicjcsbody", "shuqicjbody", "shuqisyurl2", "shuqisybody2", "shuqisyzjurl2", "shuqispbody2", "shuqirwbody2", "shuqisprwurl2", "shuqisqjlbody2", "shuqicjcsbody2", "shuqicjbody2", "shuqisyurl3", "shuqisybody3", "shuqisyzjurl3", "shuqispbody3", "shuqirwbody3", "shuqisprwurl3", "shuqisqjlbody3", "shuqicjcsbody3", "shuqicjbody3", "shuqisyurl4", "shuqisybody4", "shuqisyzjurl4", "shuqispbody4", "shuqirwbody4", "shuqisprwurl4", "shuqisqjlbody4", "shuqicjcsbody4", "shuqicjbody4", "shuqisyurl5", "shuqisybody5", "shuqisyzjurl5", "shuqispbody5", "shuqirwbody5", "shuqisprwurl5", "shuqisqjlbody5", "shuqicjcsbody5", "shuqicjbody5", "shuqisyurl6", "shuqisybody6", "shuqisyzjurl6", "shuqispbody6", "shuqirwbody6", "shuqisprwurl6", "shuqisqjlbody6", "shuqicjcsbody6", "shuqicjbody6", "shuqisyurl7", "shuqisybody7", "shuqisyzjurl7", "shuqispbody7", "shuqirwbody7", "shuqisprwurl7", "shuqisqjlbody7", "shuqicjcsbody7", "shuqicjbody7", "shuqisyurl8", "shuqisybody8", "shuqisyzjurl8", "shuqispbody8", "shuqirwbody8", "shuqisprwurl8", "shuqisqjlbody8", "shuqicjcsbody8", "shuqicjbody8", "shuqisyurl9", "shuqisybody9", "shuqisyzjurl9", "shuqispbody9", "shuqirwbody9", "shuqisprwurl9", "shuqisqjlbody9", "shuqicjcsbody9", "shuqicjbody9", "shuqisyurl10", "shuqisybody10", "shuqisyzjurl10", "shuqispbody10", "shuqirwbody10", "shuqisprwurl10", "shuqisqjlbody10", "shuqicjcsbody10", "shuqicjbody10", "shuqisyurl11", "shuqisybody11", "shuqisyzjurl11", "shuqispbody11", "shuqirwbody11", "shuqisprwurl11", "shuqisqjlbody11", "shuqicjcsbody11", "shuqicjbody11", "shuqisyurl12", "shuqisybody12", "shuqisyzjurl12", "shuqispbody12", "shuqirwbody12", "shuqisprwurl12", "shuqisqjlbody12", "shuqicjcsbody12", "shuqicjbody12", "shuqisyurl13", "shuqisybody13", "shuqisyzjurl13", "shuqispbody13", "shuqirwbody13", "shuqisprwurl13", "shuqisqjlbody13", "shuqicjcsbody13", "shuqicjbody13", "shuqisyurl14", "shuqisybody14", "shuqisyzjurl14", "shuqispbody14", "shuqirwbody14", "shuqisprwurl14", "shuqisqjlbody14", "shuqicjcsbody14", "shuqicjbody14", "shuqisyurl15", "shuqisybody15", "shuqisyzjurl15", "shuqispbody15", "shuqirwbody15", "shuqisprwurl15", "shuqisqjlbody15", "shuqicjcsbody15", "shuqicjbody15", "shuqisyurl16", "shuqisybody16", "shuqisyzjurl16", "shuqispbody16", "shuqirwbody16", "shuqisprwurl16", "shuqisqjlbody16", "shuqicjcsbody16", "shuqicjbody16", "shuqisyurl17", "shuqisybody17", "shuqisyzjurl17", "shuqispbody17", "shuqirwbody17", "shuqisprwurl17", "shuqisqjlbody17", "shuqicjcsbody17", "shuqicjbody17", "shuqisyurl18", "shuqisybody18", "shuqisyzjurl18", "shuqispbody18", "shuqirwbody18", "shuqisprwurl18", "shuqisqjlbody18", "shuqicjcsbody18", "shuqicjbody18", "shuqisyurl19", "shuqisybody19", "shuqisyzjurl19", "shuqispbody19", "shuqirwbody19", "shuqisprwurl19", "shuqisqjlbody19", "shuqicjcsbody19", "shuqicjbody19", "shuqisyurl20", "shuqisybody20", "shuqisyzjurl20", "shuqispbody20", "shuqirwbody20", "shuqisprwurl20", "shuqisqjlbody20", "shuqicjcsbody20", "shuqicjbody20", "shuqisyurl21", "shuqisybody21", "shuqisyzjurl21", "shuqispbody21", "shuqirwbody21", "shuqisprwurl21", "shuqisqjlbody21", "shuqicjcsbody21", "shuqicjbody21", "shuqisyurl22", "shuqisybody22", "shuqisyzjurl22", "shuqispbody22", "shuqirwbody22", "shuqisprwurl22", "shuqisqjlbody22", "shuqicjcsbody22", "shuqicjbody22", "shuqisyurl23", "shuqisybody23", "shuqisyzjurl23", "shuqispbody23", "shuqirwbody23", "shuqisprwurl23", "shuqisqjlbody23", "shuqicjcsbody23", "shuqicjbody23", "shuqisyurl24", "shuqisybody24", "shuqisyzjurl24", "shuqispbody24", "shuqirwbody24", "shuqisprwurl24", "shuqisqjlbody24", "shuqicjcsbody24", "shuqicjbody24", "shuqisyurl25", "shuqisybody25", "shuqisyzjurl25", "shuqispbody25", "shuqirwbody25", "shuqisprwurl25", "shuqisqjlbody25", "shuqicjcsbody25", "shuqicjbody25", "shuqisyurl26", "shuqisybody26", "shuqisyzjurl26", "shuqispbody26", "shuqirwbody26", "shuqisprwurl26", "shuqisqjlbody26", "shuqicjcsbody26", "shuqicjbody26", "shuqisyurl27", "shuqisybody27", "shuqisyzjurl27", "shuqispbody27", "shuqirwbody27", "shuqisprwurl27", "shuqisqjlbody27", "shuqicjcsbody27", "shuqicjbody27", "shuqisyurl28", "shuqisybody28", "shuqisyzjurl28", "shuqispbody28", "shuqirwbody28", "shuqisprwurl28", "shuqisqjlbody28", "shuqicjcsbody28", "shuqicjbody28", "shuqisyurl29", "shuqisybody29", "shuqisyzjurl29", "shuqispbody29", "shuqirwbody29", "shuqisprwurl29", "shuqisqjlbody29", "shuqicjcsbody29", "shuqicjbody29", "shuqisyurl30", "shuqisybody30", "shuqisyzjurl30", "shuqispbody30", "shuqirwbody30", "shuqisprwurl30", "shuqisqjlbody30", "shuqicjcsbody30", "shuqicjbody30"],
+        "author": "@ziye",
+        "settings": [{
+            "id": "shuqiSuffix",
+            "name": "当前账号",
+            "val": "1",
+            "type": "number",
+            "desc": "当前抓取ck记录的账号序号，如：1、2、3、"
+        }, {
+            "id": "shuqiCount",
+            "name": "账号个数",
+            "val": "1",
+            "type": "number",
+            "desc": "指定任务最多跑几个账号，根据抓取的账号数据个数来设值"
+        }, {
+            "id": "shuqiXH",
+            "name": "循环获取CK",
+            "val": "0",
+            "type": "number",
+            "desc": "0关闭 1开启,默认关闭"
+        }, {
+            "id": "shuqiSC",
+            "name": "单刷时长控制",
+            "val": "0",
+            "type": "number",
+            "desc": "0关闭 1开启,默认关闭"
+        }, {
+            "id": "shuqiTXTX",
+            "name": "提现提醒",
+            "val": "0",
+            "type": "number",
+            "desc": "0关闭 设置余额大于多少提醒"
+        }, {
+            "id": "shuqiXYZ",
+            "name": "执行概率",
+            "val": "100",
+            "type": "number",
+            "desc": "0不执行 可设置0-100,默认百分百"
+        }, {
+            "id": "shuqinotifyttt",
+            "name": "推送控制",
+            "val": "1",
+            "type": "number",
+            "desc": "0关闭，1推送,默认12点以及23点推送"
+        }, {
+            "id": "shuqinotifyInterval",
+            "name": "通知控制",
+            "val": "2",
+            "type": "number",
+            "desc": "0关闭，1为 所有通知，2为 12，23 点通知，3为 6，12，18，23 点通知 "
+        }, {
+            "id": "shuqiMinutes",
+            "name": "推送-通知 分钟控制",
+            "val": "10",
+            "type": "number",
+            "desc": "推送以及通知控制在什么分钟段，可设置0-59,默认0到10"
+        }],
+        "repo": "https://cdn.jsdelivr.net/gh/ziye888/JavaScript@main/Task/shuqi.js",
+        "icons": ["https://cdn.jsdelivr.net/gh/ziye888/JavaScript@main/Task/shuqi.png", "https://cdn.jsdelivr.net/gh/ziye888/JavaScript@main/Task/shuqi.png"],
+        "script": "https://cdn.jsdelivr.net/gh/ziye888/JavaScript@main/Task/shuqi.js"
+    }]
+}
