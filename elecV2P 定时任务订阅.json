@@ -1,0 +1,44 @@
+{
+  "name": "elecV2P 定时任务订阅",
+  "author": "留个名字",
+  "note": "xx 导出的任务订阅。该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
+  "date": "2021-10-09 23:21:19",
+  "list": [
+    {
+      "name": "中青看点",
+      "type": "cron",
+      "time": "35 */30 */2 * * *",
+      "job": {
+        "type": "runjs",
+        "target": "https://raw.githubusercontent.com/Sunert/Script/master/Task/Youth_Read.js"
+      }
+    },
+    {
+      "name": "中青看点极速版",
+      "type": "cron",
+      "time": "*/14 5-23 * * *",
+      "job": {
+        "type": "runjs",
+        "target": "https://raw.githubusercontent.com/Sunert/Script/master/Task/youth.js"
+      }
+    },
+    {
+      "name": "中青看点浏览赚",
+      "type": "cron",
+      "time": "20 5 10 * * *",
+      "job": {
+        "type": "runjs",
+        "target": "https://raw.githubusercontent.com/Sunert/Script/master/Task/youth_gain.js"
+      }
+    },
+    {
+      "name": "删除日志",
+      "type": "cron",
+      "time": "59 23 * * *",
+      "job": {
+        "type": "runjs",
+        "target": "https://raw.githubusercontent.com/elecV2/elecV2P/master/script/JSFile/deletelog.js"
+      }
+    }
+  ]
+}
