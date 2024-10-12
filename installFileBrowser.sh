@@ -2,11 +2,11 @@
 
 # 在root目录下新建文件夹
 echo "新建数据库文件夹..."
-mkdir /root/FileBrowser/File/
-mkdir /root/FileBrowser/database
+mkdir -p /root/FileBrowser/File/
+mkdir -p /root/FileBrowser/database
 
 # 启动docker，映射端口9999
-echo "新建数据库文件夹..."
+echo "启动docker，映射端口9999..."
 
 docker run -d \
   -v /root/FileBrowser/File/:/srv \
