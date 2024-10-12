@@ -18,7 +18,11 @@ sudo apt install -y \
     screen \
     bash-completion \
     lsb-release \
-
+# 安装 Docker
+echo "安装 Docker..."
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
 
 # 清理不必要的包
 echo "清理系统..."
