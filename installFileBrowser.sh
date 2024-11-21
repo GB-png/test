@@ -4,13 +4,14 @@
 echo "新建数据库文件夹..."
 mkdir -p /root/FileBrowser/File/
 mkdir -p /root/FileBrowser/database
-
+mkdir -p /root/FileBrowser/branding
 # 启动docker，映射端口9999
 echo "启动docker，映射端口9999..."
 
 docker run -d \
   -v /root/FileBrowser/File/:/srv \
   -v /root/FileBrowser/database:/database \
+  -v /root/FileBrowser/branding:/branding \
   -p 9999:80 \
   --name filebrowser \
   filebrowser/filebrowser
